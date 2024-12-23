@@ -1,0 +1,85 @@
+\chapter{Measurement results } 
+
+Multiple measurements were done to characterize the power supply and to measure its performance. The following characteristics and scenarios were measured:
+\begin{itemize}
+    \item The average output voltage under various levels of load.
+    \item The ripple in the output voltage under various levels of load.
+    \item The capacitors' discharge time after power supply operation. 
+\end{itemize} 
+
+\section{Average Voltage and Ripple}
+
+The voltage waveform across the load resistors $R_{1}$ and $R_{2}$ was measured under four distinct conditions to evaluate the ripple voltage. These measurements aimed to analyze the behavior of the power supply under varying load scenarios, where $R_{\text{1}}$ and $R_{\text{2}}$ simulate the operational load conditions of the circuit. The table below outlines the different test conditions:
+
+\begin{table}[h!]
+\centering
+\captionsetup{justification=centering, labelfont=bf}
+\caption{\textbf{Different conditions Ripple Voltage.}}
+\begin{tabular*}{0.9\textwidth}{@{\extracolsep{\fill}} p{0.8\textwidth} @{}} 
+\toprule
+    \begin{itemize}
+        \item \textbf{Resistors in Series} \newline With the output terminals connected to two 38 $\Omega$ resistors in series, thus forming a 19 $\Omega$ resistor as an equivalent resistor.
+        \item \textbf{Single Resistor} \newline With the output terminals connected to a single 38 $\Omega$ resistor.
+        \item \textbf{Resistor in Parallel} \newline With the output terminals connected to two 38 $\Omega$ resistors in parallel, forming a 76 $\Omega$ resistor as an equivalent resistor.
+        \item \textbf{No Load Resistors} \newline With no load on the output terminals.
+    \end{itemize} \\
+     \bottomrule
+\end{tabular*}
+\label{ConditionsRippleVoltage}
+\end{table}
+
+The graphs of the measurements can be seen in appendix \ref{sec:ripple}. When conducting those measurements, only the positive side of the power supply was loaded because the negative side is an exact copy of the positive one. Support for this claim in practice can be found in appendix \ref{sec:practevidencesymmetry}. Those measurements were done by connecting the probe to the ground and the positive output of the power supply (and by measuring the voltage over the resistors).
+
+Those measurements led to the characteristics seen in table \ref{tab:characteristics}. The ripple was calculated using the following formula \cite{labmanual}:
+\begin{flalign*}
+    u_{\text{ripple}}[\%]=\left(\frac{u_{\text{max}}-u_{\text{average}}}{u_{{average}}}\right)\cdot 100\%\
+\end{flalign*}
+The code in appendix \ref{sec:ripvoltcodemea} was used to calculate the values in table \ref{tab:characteristics}. 
+
+The ripple for the open circuit is most likely just a measurement error of the oscilloscope because the oscilloscope was set to have a resolution of 0.04 V. In the measurements, the maximum voltage is 23.04 V, and the average voltage is 23.00 V. Although there would have been a small ripple due to the capacitors slowly discharging through the discharge resistor, the ripple induced by this current was insignificant compared to the one measured, as the discharge current is very small.
+
+\begin{table}[H]
+\centering
+\captionsetup{justification=centering, labelfont=bf}
+\caption{Characteristics of the power supply under various levels of load.}
+\begin{tabularx}{0.8\textwidth}{>{\arraybackslash}X >{\arraybackslash}X >{\arraybackslash}X >{\arraybackslash}X}
+    \toprule
+    \textbf{Resistance Load [$\Omega$]} & \textbf{Average Voltage [V]} & \textbf{Average Current [A]} & \textbf{Ripple [\%]} \\
+    \midrule
+    \rowcolor[gray]{.9} {19 $\Omega$} & 20.1 & 1.06 & 3.23 \\
+    {38 $\Omega$} & 21.1 & 0.56 & 1.66 \\
+    \rowcolor[gray]{.9} {76 $\Omega$} & 21.9 & 0.29 & 1.19 \\
+    {Open} & 23.0 & 0.00 & 0.29 \\
+    \bottomrule
+\end{tabularx}
+\label{tab:characteristics}
+\end{table}
+
+
+As can be seen by comparing the simulation table with the table above, it is clear that there is a significant discrepancy between the simulation and measurement results. This can be attributed to various factors:
+\begin{itemize}
+    \item The diodes used in the simulation differ from those used in reality. The 1N4148 diodes used in the simulation are general diodes and are not fitted to carry large currents \cite{1n4148}. The 1N5408, on the contrary, can carry average rectified currents up to 3.0 A \cite{1n5408}.
+\end{itemize}
+
+\section{Discharge Time Capacitors}
+
+\begin{figure}[H]
+    \centering
+    \captionsetup{justification=centering, labelfont=bf}
+    \resizebox{0.8\columnwidth}{!}{%
+        \begin{tikzpicture} 
+                \begin{axis} [xlabel=Time (s), ylabel=Voltage (V)]
+                    \addplot+[no markers] table [x=d, y=e, col sep=comma] {./csv/discharge/F0010CH1.CSV};
+                    \addlegendentry{\(V_{out}\)}
+                    \addplot[color=red] table[row sep = crcr]{0 8.829 \\ 249.8 8.829 \\};
+                    \addplot[green, dotted] table[row sep = crcr]{33 0 \\ 33 25 \\};
+                    \addplot[green, dotted] table[row sep = crcr]{62 0 \\ 62 25 \\};
+                    \addlegendentry{\(V_{e^-1}\)}
+                \end{axis}
+        \end{tikzpicture}%
+    }
+    \caption{The discharge curve of the capacitors.}
+    \label{fig:dischargeCurve}
+\end{figure}
+
+From figure \ref{fig:dischargeCurve}, it can be seen that the capacitors are disconnected from the power supply at \(t=33.0s\). The curve crosses the red line (which indicates the point that \(\tau\) is 1) at \(t\approx 62s\). This means \(\tau \approx 28s\), which means that the capacitors will be discharged after 145 seconds, which fits nicely in the 2.5-minute limit it was designed for.

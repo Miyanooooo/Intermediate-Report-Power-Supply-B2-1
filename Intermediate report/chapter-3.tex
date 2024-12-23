@@ -1,0 +1,52 @@
+\chapter{Simulation results}
+\section{LTSpice Simulation}
+In this chapter, LTSpice simulations were initialized using the values partially gained from calculations \ref{DischargeResistor} and \ref{CapacitorSize}, although real-world availability of these values wasn't possible. Therefore, deviations were made from the values presented previously; for the capacitor, a value of 6800 $\mu{F}$ was chosen, and for the discharge resistors, a value of 3.9 k$\Omega$ was chosen. Further elaboration and information regarding the choice of values will be presented in the subsequent sections and chapters.
+\vspace{10pt}
+\begin{figure}[H]
+    \centering
+    \captionsetup{justification=centering, labelfont=bf}
+    \includegraphics[width=0.8\linewidth]{ps (1).asc}
+    \caption{{The LTSpice circuit. For convenience, the transformer is transformed into a  }}
+    \label{fig:MainPowerSupplySchematicLTSpice}
+\end{figure}
+
+As previously discussed, the LTSpice simulations were performed for only one output terminal, as the use of a center-tapped transformed allows the existence of symmetry of the power supply; this ensures consistent behavior on both the positive and negative output terminals. This means that analysis on only one side of the output terminal is sufficient.
+
+\begin{figure}[H]
+    \centering
+    \captionsetup{justification=centering, labelfont=bf}
+    \includegraphics[width=0.98\linewidth]{SimulatedCircuitOutputVoltage}
+    \caption{{The simulated circuit output voltage. The blue line represents the circuit without any smoothing capacitors, while the black line represents the circuit with them present.}}
+    \label{fig:OutputVoltageWith-Without}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \captionsetup{justification=centering, labelfont=bf}
+    \includegraphics[width=0.98\linewidth]{3}
+    \caption{{The simulated circuit current through the transformer. The blue line represents the circuit without any smoothing capacitors, while the black line represents the circuit with them present.}}
+    \label{fig:OutputCurrenteWith-Without}
+\end{figure}
+\vspace{10pt}
+
+Figures \ref{fig:OutputVoltageWith-Without} and \ref{fig:OutputCurrenteWith-Without} clearly demonstrate the impact of the smoothing capacitors on the output voltage and current waveforms. In figure \ref{fig:OutputVoltageWith-Without}, the absence of smoothing capacitors results in the output voltage remaining a somewhat sinusoidal shape even after rectification. Conversely, the inclusion of smoothing capacitors produces an output voltage waveform that closely resembles a steady DC voltage signal. 
+
+\begin{table}[H]
+\centering
+\captionsetup{justification=centering, labelfont=bf}
+\caption{Characteristics of the power supply in simulation under various levels of load.}
+\begin{tabularx}{0.8\textwidth}{>{\arraybackslash}X >{\arraybackslash}X >{\arraybackslash}X >{\arraybackslash}X}
+    \toprule
+    \textbf{Resistance Load [$\Omega$]} & \textbf{Average Voltage [V]} & \textbf{Average Current [A]} & \textbf{Ripple [\%]} \\
+    \midrule
+    \rowcolor[gray]{.9} {19 $\Omega$} & 18.3 & 0.963 & 0.38 \\
+    {38 $\Omega$} & 19.6 & 0.516 & 0.21 \\
+    \rowcolor[gray]{.9} {76 $\Omega$} & 20.5 & 0.27 & 0.11 \\
+    {Open} & 22.3 & 0.00 & 0.20 \\
+    \bottomrule
+\end{tabularx}
+\label{tab:characteristicsSim}
+\end{table}
+
+Table \ref{tab:characteristicsSim} presents the simulation results for the power supply operating under different resistive load conditions. The data includes each load's average output voltage, current, and ripple percentage. The ripple percentage was calculated using equation \ref{Ripple Voltage2}. All the values were calculated by the code in appendix \ref{sec:ripvoltcodesim}. These simulation results demonstrate how the power supply responds to varying loads, providing insight into its ability to maintain consistent performance and stability across different operational scenarios and various load levels.
+
+

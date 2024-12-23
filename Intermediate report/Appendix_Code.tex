@@ -1,0 +1,89 @@
+\chapter{Code}
+\label{ch:code}
+
+\section{Ripple and Average Voltage Simulations}
+\label{sec:ripvoltcodesim}
+
+Below code was used to calculate the average voltage and ripple of the output voltage of the simulations.
+
+\begin{python}
+import pandas as pd
+
+def ripple(avg, max):
+    return (max-avg)/avg*100
+
+
+datas = [(".\\19 ohm.txt",19),
+    	(".\\38 ohm.txt",38),
+    	(".\\76 ohm.txt",76),
+    	(".\\no load.txt",None)]
+
+for data in datas:
+    file = data[0]
+    resistance = data[1]
+    
+    data = pd.read_csv(file, delimiter="\t")
+    #Only take the last part of the simulation to avoid the waveform when the capacitors are still being loaded
+    t = data["time"][len(data["time"])//3*2:]
+    v = data["V(n001)"][len(data["V(n001)"])//3*2:]
+    i = data["I(R2)"][len(data["I(R2)"])//3*2:]
+
+    maxV = v.max()
+    minV = v.min()
+    meanV = v.mean()
+    meanI = i.mean()
+    
+    if resistance == None:
+        print(f"Using {file} (Power supply is not loaded)")
+    else:
+        print(f"Using {file} (Power supply is loaded with a {resistance} Ohm resistor)")
+
+    print(f"    Load resistance: {resistance}")   
+    print(f"    Average Voltage: {meanV:.3}V")
+    print(f"    Average Current: {meanI:.3}A")
+    print(f"    Ripple: {ripple(meanV, maxV):.3}%")
+\end{python}
+\newpage
+\section{Ripple and Average Voltage Measurements}
+\label{sec:ripvoltcodemea}
+
+Below code was used to calculate the average voltage and ripple of the output voltage of the measurements.
+
+\begin{python}
+import pandas as pd
+
+def ripple(avg, max):
+    return (max-avg)/avg*100
+
+# Tuples are formatted as (filename,resistance)
+datas = [(".\\19 ohm\\F0009CH1.CSV",19),
+    	(".\\38 ohm\\F0007CH1.CSV",38),
+    	(".\\76 ohm\\F0011CH1.CSV",76),
+    	(".\\No load\\F0008CH1.CSV",None)]
+
+for data in datas:
+    file = data[0]
+    resistance = data[1]
+    
+    measured_data = pd.read_csv(file, usecols=[3,4])
+    t = measured_data["d"]
+    v = measured_data["e"]
+
+    maxV = v.max()
+    minV = v.min()
+    meanV = v.mean()
+
+    if resistance == None:
+        print(f"Using {file} (Power supply is not loaded)")
+    else:
+        print(f"Using {file} (Power supply is loaded with a {resistance} Ohm resistor)")
+    print(f"    Load resistance: {resistance}")   
+    print(f"    Average Voltage: {meanV:.3}V")
+    if resistance == None:
+        print(f"    Average Current: 0.00A")
+    else:
+        print(f"    Average Current: {meanV/resistance:.3}A")
+    print(f"    Ripple: {ripple(meanV, maxV):.3}%")
+
+\end{python}
+

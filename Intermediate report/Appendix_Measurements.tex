@@ -1,0 +1,95 @@
+\chapter{Measurements}
+
+\section{Average Voltage and Ripple Measurement Results}
+\label{sec:ripple}
+
+\begin{figure}[H]
+    \centering
+    \captionsetup{justification=centering, labelfont=bf}
+    \resizebox{0.8\columnwidth}{!}{%
+        \begin{tikzpicture} 
+                \begin{axis} [xlabel=Time (s), ylabel=Voltage (V)]
+                    \addplot table [x=d, y=e, col sep=comma, mark=none] {./csv/19 ohm/F0009CH1.CSV};
+                \end{axis}
+        \end{tikzpicture}%
+    }
+    \caption{The output voltage waveform with the power supply loaded with a 19 \(\Omega\) resistor.}
+    \label{fig:ripple19ohm}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \captionsetup{justification=centering, labelfont=bf}
+    \resizebox{0.8\columnwidth}{!}{%
+        \begin{tikzpicture} 
+                \begin{axis} [xlabel=Time (s), ylabel=Voltage (V)]
+                    \addplot table [x=d, y=e, col sep=comma, mark=none] {./csv/38 ohm/F0007CH1.CSV};
+                \end{axis}
+        \end{tikzpicture}%
+    }
+    \caption{The output voltage waveform with the power supply loaded with a 38 \(\Omega\) resistor.}
+    \label{fig:ripple38ohm}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \captionsetup{justification=centering, labelfont=bf}
+    \resizebox{0.8\columnwidth}{!}{%
+        \begin{tikzpicture} 
+                \begin{axis} [xlabel=Time (s), ylabel=Voltage (V)]
+                    \addplot table [x=d, y=e, col sep=comma, mark=none] {./csv/76 ohm/F0011CH1.CSV};
+                \end{axis}
+        \end{tikzpicture}%
+    }
+    \caption{The output voltage waveform with the power supply loaded with a 76 \(\Omega\) resistor.}
+    \label{fig:ripple76ohm}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \captionsetup{justification=centering, labelfont=bf}
+    \resizebox{0.8\columnwidth}{!}{%
+        \begin{tikzpicture} 
+                \begin{axis}[voltageToZero]
+                    \addplot table [x=d, y=e, col sep=comma, mark=none] {./csv/No load/F0008CH1.CSV};
+                \end{axis}
+        \end{tikzpicture}%
+    }
+    \caption{The output voltage waveform with no load on the output terminals.}
+    \label{fig:outputopen}
+\end{figure}
+
+\newpage
+
+\section{Symmetry of Power Supply}
+\label{sec:practevidencesymmetry}
+
+To show that the claim that the negative part of the power supply is the mirrored counterpart of the positive part also holds in practice, some measurements were conducted. In figure \ref{fig:ripple38ohmboth}, a 38 \\Omega resistor was connected between the positive output and ground and the negative output and ground. This figure shows that the positive output mirrored around 0 V equals the negative output. Figure \ref{fig:outputopenboth} shows this too.
+
+\begin{figure}[H]
+    \centering
+    \captionsetup{justification=centering, labelfont=bf}
+    \resizebox{0.8\columnwidth}{!}{%
+        \begin{tikzpicture} 
+                \begin{axis} [xlabel=Time (s), ylabel=Voltage (V)]
+                    \addplot table [x=d, y=e, col sep=comma, mark=none] {./csv/38 ohm/F0007CH1.CSV};
+                    \addplot table [x=d, y=e, col sep=comma, mark=none] {./csv/38 ohm/F0007CH2.CSV};
+                \end{axis}
+        \end{tikzpicture}%
+    }
+    \caption{The output voltage waveform with the power supply loaded with a 38 \(\Omega\) resistor.}
+    \label{fig:ripple38ohmboth}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \captionsetup{justification=centering, labelfont=bf}
+    \resizebox{0.8\columnwidth}{!}{%
+        \begin{tikzpicture} 
+                \begin{axis} [xlabel=Time (s), ylabel=Voltage (V)]
+                    \addplot table [x=d, y=e, col sep=comma, mark=none] {./csv/No load/F0008CH1.CSV};
+                    \addplot table [x=d, y=e, col sep=comma, mark=none] {./csv/No load/F0008CH2.CSV};
+                \end{axis}
+        \end{tikzpicture}%
+    }
+    \caption{The output voltage waveform with the power supply under no load.}
+    \label{fig:outputopenboth}
+\end{figure}
+

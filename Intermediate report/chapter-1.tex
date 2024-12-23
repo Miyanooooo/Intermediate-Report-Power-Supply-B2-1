@@ -1,0 +1,48 @@
+\chapter{Introduction} 
+\label{CircuitIntroduction}
+\section{Introduction to the Power Supply}
+The Booming Bass Sound System consists of multiple subsystems, including the power supply, which is essential for its functionality. As its name implies, the power supply subsystem provides the necessary electrical power to support the operation of the entire sound amplification system and is a key component for the power amplifying subsystem. This report focuses on the power supply's design, simulation, and analysis, emphasizing the system requirements, design decisions, and methodologies implemented to achieve the specified and desired performance criteria.
+
+\section{Power Supply Requirements}
+The power supply system must meet several critical requirements to ensure optimal and reliable operation of the sound amplifying system. These requirements are, therefore, essential for the proper functionality of the overall system, particularly in delivering consistent and stable power to the connected components. Below is a detailed list of the requirements that must be taken into account:
+\begin{itemize}
+    \item \textbf{Unloaded output voltage}: Within a $\pm$ 20-22 V DC range on each positive and negative terminal side respective. 
+    \item \textbf{Unloaded Operation Discharge Time}: During operation without a load, the power supply should fully discharge within a duration of 2.5 minutes. 
+    \item \textbf{Load Output Voltage}: Under a load current of 1.0 A, the output voltage waveform should remain within 17-20 V DC.
+    \item \textbf{Ripple Voltage}: The ripple voltage should not exceed 5\%. \\
+    Additional details and further analysis of the ripple voltage will be presented in the subsequent sections of the report.
+    \item \textbf{Compatibility with Load Requirements}
+\end{itemize}
+\subsection{Power Supply Schematic}
+The power supply system's requirement and desired performance depend on design choices and decisions made during the project. Achieving the required performance for the Booming Bass Project necessitates careful consideration of various factors and parameters, including selecting the appropriate diodes, the values of multiple resistors, and the capacitance of smoothing capacitors. Each component mentioned must be chosen to ensure the power supply meets the specified requirements for voltage regulation, ripple percentage, and load performance. 
+
+\vspace{10pt}
+\begin{figure}[H]
+    \centering
+    \captionsetup{justification=centering, labelfont=bf}
+    \includegraphics[width=0.75\linewidth]{MainPowerSupply.asc}
+    \caption{{Complete schematic of the power supply.}}
+    \label{fig:MainPowerSupplySchematic}
+\end{figure}
+\vspace{10pt}
+
+Figure \ref{fig:MainPowerSupplySchematic} shows the complete schematic of the power supply. Each element in the schematic is clearly labeled and serves a distinct function to meet the defined system requirements.
+It is clear from the schematic that the power supply is dependent on multiple factors and parameters and, thus, on their respective value. A brief explanation of these components is provided below. Additional details about their function will be presented in chapter \ref{CircuitDesign}.
+\begin{itemize}
+    \item {\textbf{Resistors} $R_{1}$ \textbf{and} $R_{2}$}: These resistors will act and form the load of the power supply circuit, therefore simulating the load of real-world scenarios.
+    \item {\textbf{Resistors} $R_{\text{dis,1}}$ \textbf{and} $R_{\text{dis},2}$}: These resistors serve as discharge resistors, ensuring the safety of both the users and the capacitors by discharging the stored energy after each power supply operation.
+    \item \textbf{Capacitors $C_{1}$ and $C_{2}$}: These capacitors are essential for smoothening the rectified DC output.
+    \item \textbf{Diodes (1N5408)}: The diodes in the power supply circuit are responsible for the rectification process, converting the bidirectional flow of alternating current (AC) into the unidirectional flow of direct current (DC). Which is essential for providing a DC voltage output.
+\end{itemize}
+
+\subsection{Ripple Voltage}
+As mentioned, the smoothing capacitors filter out the ripple from the DC output voltage waveform after the rectifiers. Ripple voltage is a value expressed as a percentage, representing the difference between the maximum and average voltage, divided by the average voltage, and multiplied by 100\%. The formula for calculating the ripple voltage is as follows:
+
+\begin{flalign}\label{Ripple Voltage}
+    u_{\text{ripple}}[\%]=\left(\frac{u_{\text{max}}-u_{\text{average}}}{u_{{average}}}\right)\cdot 100\%
+\end{flalign}
+
+Further information regarding the ripple voltage and percentage can be found in the subsequent sectors, the Appendix, and the Integrated Project-1 Manual.
+
+
+

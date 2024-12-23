@@ -1,0 +1,248 @@
+\documentclass[whitelogo,oneside]{tudelft-report}
+\usepackage{csquotes}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{soul}
+\usepackage[useprefix]{biblatex}
+\addbibresource{report.bib}
+\usepackage{changes}
+\usepackage{csquotes}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{soul}
+\usepackage{biblatex}
+\addbibresource{report.bib}
+\usepackage{changes}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{soul}
+\usepackage{biblatex}
+\usepackage{fancyhdr}
+\usepackage{nameref}
+\addbibresource{report.bib}
+\usepackage[document]{ragged2e}
+\usepackage{siunitx}
+\usetikzlibrary{arrows.meta}
+\usepackage[table]{xcolor}
+
+\usepackage{changes}
+\usepackage{blindtext}
+\usepackage{setspace}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{xcolor}
+\usepackage{longtable}
+\usepackage{verbatim}
+
+\makeatletter
+%%% redefine \eqref to be like the original
+\renewcommand{\eqref}[1]{\textup{\eqreftagform@{\ref{#1}}}}
+\let\eqreftagform@\tagform@
+%%% redefine \tagform@
+\def\tagform@#1{%
+  \maketag@@@{%
+    \if@unit(\thiseq@unit)\quad\fi\global\@unitfalse
+    (\ignorespaces#1\unskip\@@italiccorr)%
+  }%
+}
+\newif\if@unit
+\def\equnit#1{%
+  \gdef\thiseq@unit{#1}%
+  \global\@unittrue
+}
+\makeatother
+
+\newcommand*\varunit[1]{& \llap{\si{[#1]}}&\quad}
+
+
+
+%% Dependencies
+% Appendices
+\usepackage[toc,page]{appendix}
+% Flexible bibliography
+%\usepackage{natbib}
+% ToDo notes
+\usepackage{todonotes}
+% Enumeration
+\usepackage{nth}
+% Fancy tables
+\usepackage{tabularx}
+\usepackage{booktabs}
+% Floats
+\usepackage{float}
+% Numbers
+\usepackage{numprint}
+\npthousandsep{\,}
+% Inline lists
+\usepackage[inline]{enumitem}
+% Subfigures
+\usepackage{subcaption}
+% Correct single quotes
+\usepackage{textcomp}
+% Colored boxes
+\usepackage{tcolorbox}
+\usepackage{float}
+% Custom list spacing
+\usepackage{enumitem}
+%% Dependencies
+% Appendices
+\usepackage[toc,page]{appendix}
+% Flexible bibliography
+%\usepackage{natbib}
+% ToDo notes
+\usepackage{todonotes}
+% Enumeration
+\usepackage{nth}
+% Fancy tables
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{graphicx}
+% Floats
+\usepackage{float}
+% Numbers
+\usepackage{numprint}
+\npthousandsep{\,}
+% Inline lists
+\usepackage[inline]{enumitem}
+% Subfigures
+\usepackage{subcaption}
+% Correct single quotes
+\usepackage{textcomp}
+% Colored boxes
+\usepackage{tcolorbox}
+\usepackage{float}
+% Custom list spacing
+\usepackage{enumitem}
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+\usepackage{circuitikz}
+\usepackage{pythonhighlight}
+
+\pgfplotsset{compat=1.18}
+
+%% Setup
+% Base path for all figures
+\graphicspath{ {./figures/} }
+
+% Citation needed
+\newcommand{\citationneeded}{\textsuperscript{\color{blue} [citation needed]}}
+
+% Inline lists
+\newlist{inlinelist}{enumerate*}{1}
+\setlist[inlinelist]{label=(\roman*)}
+
+% Count subsubsections, as well
+\setcounter{secnumdepth}{3}
+
+% Research conclusions
+\newtcolorbox{linkbox}{colback=tudelft-cyan!30, colframe=white,top=0.35cm,right=0.65cm,bottom=0.35cm, boxrule=0pt, arc=0pt}
+
+% Set up ToDo notes package
+\newcommand{\todoall}[1]{\todo[inline, caption={}, color=red!40]{Everyone: #1}}
+\newcommand{\todoany}[1]{\todo[inline, caption={}, color=orange!40]{Anyone: #1}}
+%%% ADD YOUR OWN TODO COMMANDS HERE, IF WANTED %%%
+
+%%% FILL THIS IN %%%
+
+% Your product name
+\newcommand{\productName}{Power Supply Design}
+
+% Your group number
+\newcommand{\groupNumber}{B2-1 PS1}
+
+% Your names
+\newcommand{\studentNames}{%
+\Large Alex Guo, \\
+\Large Gerrald van Weelden \\
+\Large Teaching Assistant: M. Mihankhah \\
+\Large Tutor: H. Bosma \\
+\Large EE1L1 \\
+\vspace{15px}
+\Large \today
+ }
+
+ \pgfplotsset{voltageToZero/.style={%
+        ylabel={Voltage (V)},
+        xlabel={Time (s)},
+        ymin=0}}
+
+\begin{document}
+
+%% Use Roman numerals for the page numbers of the title pages and table of
+%% contents.
+ 
+
+%% Uncomment following 19 lines for a cover with a picture on the lower half only
+%\title[tudelft-white]{Title}
+%\subtitle[tudelft-cyan]{Optional subtitle}
+%\author[tudelft-white]{J.\ Random Author}
+%\affiliation{Technische Universiteit Delft}
+%\coverimage{cover.jpg}
+%\titleoffsetx{10cm}
+%\titleoffsety{10cm}
+%\afiloffsetx{1cm}
+%\afiloffsety{18cm}
+%\covertext[tudelft-white]{
+%    \textbf{Cover Text} \\
+%    possibly \\
+%    spanning 
+%    multiple 
+%    lines
+%    \vfill
+%    ISBN 000-00-0000-000-0
+%}
+%\makecover
+
+%% Uncomment following 16 lines for a cover with a picture on the lower half only
+
+
+% Numbering style
+\frontmatter
+
+%% Metadata
+\title[tudelft-white]{EE1L1 IP-1 Project Report}
+\subtitle[tudelft-black]{\productName}
+\author[tudelft-white]{Group \groupNumber}
+\affiliation{Delft University of Technology}
+\coverimage{figures/cover.jpg}
+
+%% Content
+% Coverpage
+\setpagecolor{tudelft-cyan}
+\makecover[split,whitelogo]
+
+% Frontmatter chapters
+\input{title-page.tex}
+
+%% Include an optional title page.
+% \input{title}
+
+% \input{preface}
+
+\tableofcontents
+
+%% Use Arabic numerals for the page numbers of the chapters.
+\mainmatter
+
+
+\input{chapter-1}
+\input{chapter-2}
+\input{chapter-3}
+\input{chapter-4}
+\input{chapter-5}
+
+\printbibliography
+
+%% Use letters for the chapter numbers of the appendices.
+
+%\input{appendix-a}
+ 
+\appendix
+\input{Appendix_A}
+\input{Intermediate report/Appendix_Simulations}
+\input{Appendix_Measurements.tex}
+\input{Intermediate report/Appendix_Code}
+
+\end{document}
+

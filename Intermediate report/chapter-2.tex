@@ -1,0 +1,120 @@
+\chapter{Design Methodology} 
+\label{CircuitDesign}
+
+
+\section{Design Procedure}
+The design procedure for the power supply circuit and system begins with defining the system requirements and a rough understanding of the operating conditions for the Booming Bass Sound System. Most requirements are already addressed in Chapter \ref{CircuitIntroduction}. In brief, the power supply must deliver a stable DC voltage at the positive and negative output terminals, which implies a minimized ripple, particularly under a 1.0 A load current. The target output voltage is $\pm$19 V, with the ripple voltage not exceeding 5\% of its average value.
+The primary goal is to design a power supply that efficiently converts the AC voltage from the main outlet through a center-tapped transformer into a stable DC voltage waveform, thus capable of powering and providing power to the entire sound amplifying system.
+
+\subsection{Circuit Component Selection}
+With the power supply requirements in mind, the next step was to select appropriate components and to inventory what components were available and required to ensure the operation of the power supply. This included:
+\begin{itemize}
+    \item \textbf{Transformer}: A center-tapped transformer to provide a dual output voltage necessary for the full wave rectification process. The transformer, therefore, provides both a positive and a negative output.
+    \item \textbf{Oscilloscope: Tektronix TDS 2022B} An oscilloscope is necessary to conduct analysis and measurements after building the power supply to check the performance of the power supply.
+    \item \textbf{Capacitors}: Smoothing capacitors are used to filter the ripple in the DC output. Since the center-tapped transformer provides both positive and negative outputs at the terminals, two smoothing capacitors are employed- one for the positive voltage and the other for the negative output voltage. 
+    \item \textbf{Resistors}: The resistors in the power supply serve different functions; two act as discharge resistors to ensure safe user operation of the power supply, while another two are used to simulate the power supply's load. 
+\end{itemize}
+
+\subsection{Analysis, Testing \& Measurements}
+The results obtained from simulating the circuit in LTSpice should provide valuable insight into the expected performance of the power supply and what to expect from the power supply.
+
+After analyzing the expected performance of the power supply through circuit simulations, testing and measurements of the assembled power supply must be conducted to verify that its real-world, or in other words practical, performance aligns with the predicted outcomes.
+
+\subsection{Final Design}
+If the results align with the requirements of the Booming Bass Project and meet the desired specifications and results, no additional changes and modifications are necessary to the power supply circuit.
+
+\section{Circuit Elements and Components}
+The performance of the power supply system depends heavily on design decisions made throughout the project. Achieving the desired performance for the Booming Bass Project requires careful consideration of various factors, such as the selection of diodes, the values of resistors, and the capacitance of smoothing capacitors. Each component's value must be chosen to ensure the power supply meets the specified requirements for voltage regulation, ripple percentage, and load performance. The complete schematic of the circuit is provided in Chapter \ref{CircuitIntroduction}, but for convenience, it is also included here:
+
+\vspace{10pt}
+\begin{figure}[h!]
+    \centering
+    \captionsetup{justification=centering, labelfont=bf}
+    \includegraphics[width=0.75\linewidth]{MainPowerSupply.asc}
+    \caption{{Complete schematic of the power supply.}}
+    \label{fig:MainPowerSupplySchematic2}
+\end{figure}
+\vspace{10pt}
+
+The complete schematic of the power supply is shown in Figure \ref{fig:MainPowerSupplySchematic2}. Each element in the schematic is clearly labeled and serves a distinct function to meet the defined system requirements.
+It is clear from the schematic that the power supply is dependent on multiple components and, thus, on their respective value.
+\begin{itemize}
+    \item \textbf{Resistors $R_{1}$ and $R_{2}$}: These resistors act and form the load of the power supply circuit, therefore simulating a real-world load. The values of the load resistors are based on the equivalent resistance of the sound-amplifying system and thus selected to ensure and to check that the output voltage remains within the desired range (e.g., 17-20 V DC) when a load current of 1.0 A is applied to the power supply circuit.
+    
+    \item {\textbf{Resistors} $R_{\text{dis,1}}$ \textbf{and} $R_{\text{dis,2}}$}: These resistors serve as discharge resistors, ensuring safe operation by discharging the stored energy after power supply operation. These resistors should allow the power supply to be fully discharged within 2.5 minutes after operation
+    
+    \item \textbf{Capacitors $C_{1}$ and $C_{2}$}: These capacitors are essential for smoothing the rectified AC input, functioning as output filters to reduce ripple in the outgoing DC voltage at each terminal. In the power supply circuit, the AC voltage from the transformer undergoes rectification through the diodes, but fluctuations are still present in the DC output. These fluctuations are referred to as ripple. Capacitors $C_{1}$ and $C_{2}$ charge during the peaks of the DC waveform and discharge during the troughs, effectively ensuring that the DC voltage remains as stable as possible. The difference between the maximum and minimum capacitor voltage is thus called the ripple voltage. The choice of the capacitance values $C_{1}$ and $C_{2}$ and the load current determines the degree of ripple reduction and, thus, the overall stability of the output.
+    
+    \item \textbf{Diodes (1N5408)}: The power supply circuit diodes are responsible for rectifying the AC input into a unidirectional DC output. The actual diodes are already soldered on and differ from those chosen in the simulation process; the standard 1N4148 diodes are chosen in the LTSpice simulations for convenience.
+    While they differ in primary characteristics, the 1N5408 diodes are more resilient than the 1N4148 regarding maximum repetitive peak voltage and maximum RMS voltage.
+    
+\end{itemize}
+
+\newpage
+\subsection{Dimensioning Circuit Components and Elements}
+Using the equation provided earlier in Chapter \ref{CircuitIntroduction} and in the Integrated Project-1 Manual for $u_{\text{ripple}}[\%]$, the ripple voltage below 5\%, the maximum voltage can be calculated, assuming that the average voltage after the rectifier is 19  V, given a load current of 1.0 A, as follows:
+\begin{flalign}\label{Ripple Voltage2}
+    u_{\text{ripple}}[\%]=\left(\frac{u_{\text{max}}-u_{\text{average}}}{u_{{average}}}\right)\cdot 100\%
+\end{flalign}
+
+Rearranging equation \ref{Ripple Voltage2} yields the following expression for $u_{\text{max}}$:
+\begin{flalign}\label{Maximun Voltage}
+    u_{\text{max}}=u_{\text{average}}\left(100\% + u_{\text{ripple}}[\%]\right),\equnit{\si{\volt}}
+\end{flalign}
+
+Equation \ref{Maximum Voltage2} remains dependent on the average voltage and the ripple percentage. Therefore, the maximum voltage can be calculated when the average voltage after rectification is 19 V, with a load current of 1.0 A, as shown below:
+\begin{flalign}\label{Maximum Voltage2}
+u_{\text{max}}  & =u_{\text{average}}\left(100\% + u_{\text{ripple}}[\%]\right)\notag\\
+                & = \left(19 V\right)\left({100\% + 5\%}\right)\notag\\
+               & = 19.95 V
+\end{flalign}
+
+From the calculation, it is clear that the maximum voltage must not exceed 19.95 V to ensure that the ripple voltage remains within 5\% of the average voltage. With this constraint and limitation in place, the necessary capacitance value to keep the ripple voltage under 5\% can be determined and calculated. This calculation is based on a maximum post-rectification voltage of 19 V and during a load current of 1.0 A, using the voltage-current relationship for a capacitor:
+\begin{flalign}\label{CapacitorEquation}
+    I=C_{1,2}\left(\frac{dV}{dt}\right) 
+    \equnit{\si{\ampere}}
+\end{flalign}
+
+For this calculation, a first-order approximation of the exponential decay of the voltage across the capacitor is applied. It is assumed that this decay follows a linear behavior, allowing it to be approximated as shown in equation \ref{LinearApproximation}. By combining equations \ref{CapacitorEquation} and \ref{LinearApproximation}, the voltage-current relationship for the capacitor can be rewritten as follows:
+\begin{flalign}\label{LinearApproximation}
+    \frac{dV}{dt}\approx\frac{\Delta{U_{\text{dc}}}}{\Delta{t}}=\frac{2\left(u_{\text{max}}-u_{\text{average}}\right)}{\Delta t}
+\end{flalign}
+\begin{flalign}
+    I    &= {C_{1,2}}\left(\frac{dV}{dt}\right)={C_{1,2}}\left(\frac{\Delta{U_{\text{dc}}}}{\Delta{t}}\right)=C_{1,2}\left(\frac{2\left(u_{\text{max}}-u_{\text{average}}\right)}{\Delta t}\right) 
+    \equnit{\si{\ampere}}
+\end{flalign}
+The equation for calculating the required capacitance is expressed as:
+\begin{flalign}
+    C_{1,2}   &=I\left(\frac{1}{\left(\frac{\Delta U_{\text{dc}}}{\Delta t}\right)}\right)=I\left(\frac{\Delta t}{\Delta U_{\text{dc}}}\right)=I\left(\frac{\Delta t}{2\left(u_{\text{max}}-u_{\text{average}}\right)}\right)
+    \equnit{\si{F}}
+\end{flalign}
+
+Therefore, the required capacitance to achieve a ripple voltage below 5\% is calculated as follows:
+\begin{flalign}\label{CapacitorSize} 
+C_{1,2}        &= 1.0\left(\frac{0.01}{2(19.95-19.00)}\right)=\left(\frac{0.01}{1.90}\right)= 5.2631\ldots\cdot10^{-3}{F}\notag\\
+        &= 5263 \mu{F}
+\end{flalign}
+
+It is important to note that the calculated capacitance values apply individually to both the power supply circuit's positive and negative output terminals. Consequently, the two capacitors of equal capacitance are required to ensure proper functionality on either side of the output terminal.
+
+\newpage
+\subsubsection{Discharge Resistors}\label{Discharge_Resistor_Section}
+For the effective operation of the power supply and to ensure the safety of the smoothing capacitors, discharge resistors play a crucial role. Their value can be determined using the time constant of the power supply, which behaves as an RC circuit. The calculation is based on the following equation, where ${i=1,2}$ respective to each discharge resistor and each smoothing capacitor:
+
+\begin{flalign}\label{RCCircuit}
+    \tau    &= {R_{\text{i}}}{C_{\text{i}}}=R_{1,2}C_{1,2}=R_{\text{dis,1 dis,2}}C_{1,2}
+    \equnit{\si{s}}
+\end{flalign}
+
+As for the power supply circuit, the smoothing capacitors are assumed to be fully discharged after approximately 5$\tau$. Thus, it is assumed that 5$\tau\approx s_{\text{dis}}$, where $s_{\text{dis}}$ represents the discharge time. In this case, the power supply should discharge within 2.5 minutes, meaning that $s_{\text{dis,max}}=150$. Rewriting equation \ref{RCCircuit} for $R_{\text{i}}$ gives:
+\begin{flalign}\label{DischargeResistor}
+    R_{\text{i}}    &=R_{\text{dis,1 dis,2}}=\frac{\tau}{C_{\text{i}}}=\left(\frac{{\left(\frac{s_{\text{dis}}}{5}\right)}}{C_{\text{i}}}\right)=\frac{s_{\text{dis}}}{5C_{\text{i}}}
+    \equnit{\si{\Omega}}
+\end{flalign}
+Therefore, the discharge resistance required to ensure the power supply fully discharges within 2.5 minutes or 150 seconds is determined as follows:
+\begin{flalign}\label{DischargeResistors}
+    R_{\text{dis,1. dis,2}}    &=\frac{150}{5(5.263\cdot10^{-3})}\notag\\
+                    &=5700 \Omega
+\end{flalign}   
+
+A discharge resistance of 5700 $\Omega$ for $R_{\text{dis,1}}$ and $R_{\text{dis,2}}$ respective ensures that the power supply fully discharges within 2.5 minutes, given a smoothing capacitance of 5263 $\mu{F}$ at each side of the output terminals. This calculation and the corresponding equation \ref{DischargeResistor} show that reducing the discharge resistance will result in a shorter discharge time for the power supply. For this reason, a smaller value for the discharge resistor was selected to achieve a shorter discharge time between power supply operations.

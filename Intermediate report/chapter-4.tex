@@ -1,0 +1,26 @@
+\chapter{Power Supply Assembly}
+\section{Main Power Supply PCB}
+This chapter outlines the step-by-step process for assembling the power supply circuit, ensuring accurate implementation of all components and elements. The Power Supply Assembly procedure includes soldering on the smoothing capacitors $C_{1}$ and $C_{2}$ and the discharge resistors $R_{\text{dis,1}}$ and $R_{\text{dis,2}}$. The selection and dimensioning of each component within the power supply circuit have been thoroughly addressed in the preceding sections of this report.
+
+\vspace{10pt}
+\begin{figure}[h!]
+    \centering
+    \captionsetup{justification=centering, labelfont=bf}
+    \includegraphics[width=0.75\linewidth]{21}
+    \caption{{The layout of the power supply PCB. The positions in yellow and cyan correspond to the respective names of the components used in this report.}}
+    \label{fig:MainPowerSupplySchematicPCB}
+\end{figure}
+\vspace{10pt}
+The PCB layout below clearly illustrates the designated locations for each component discussed, where the diodes responsible for the rectification process were pre-soldered. The power supply's positive and negative output terminals are located on the right side of the circuit, as seen in figure \ref{fig:MainPowerSupplySchematicPCB}, relative to the ground on the same side.
+
+\subsection{The Smoothing Capacitors}
+As previously discussed in Chapter \ref{CircuitIntroduction} and Chapter \ref{CircuitDesign}, the capacitors in the power supply are used to smoothen out the voltage waveform after rectification. The capacitors achieve this by storing energy during the peaks of the DC voltage waveform and releasing it during the troughs, effectively reducing the fluctuations and, therefore, ensuring a more stable output voltage. Based on calculations \ref{Maximum Voltage2} and \ref{CapacitorSize} in chapter \ref{CircuitDesign}, it is evident that a capacitance of 5263 $\mu{F}$ is required on each output terminal of the power supply to maintain ripple voltage below 5\%. 
+
+In reality, the available capacitor values options were limited to one for 4700 $\mu{F}$ and another option for 6800 $\mu{F}$. Still, as previously discussed, a higher capacitance results in reduced ripple, leading to a more stable DC output voltage waveform. The capacitance's value is important since it directly dictates the magnitude of the smoothening. A higher capacitance ensures a more stable output voltage waveform. For this reason, the 6800 $\mu{F}$ capacitor was chosen as the smoothing capacitors.
+
+\subsection{Discharge Resistors}
+As previously discussed in Chapter \ref{CircuitDesign} and section \ref{Discharge_Resistor_Section}, the discharge resistors in the power supply are responsible for the safe discharge of the power supply operation. Based on calculation \ref{DischargeResistors}, it is evident that a resistance of 5700 $\Omega$ is required. However, as discussed in section \ref{Discharge_Resistor_Section}, a smaller value of the discharge resistor contributes to a shorter overall discharge time and, therefore, quicker times between operation sessions. For this exact reason, a 3.9 k$\Omega$ resistor is used.
+
+\subsection{The Load Resistors}
+Load resistors were utilized to simulate a load current of 1.0 A on the power supply circuit while maintaining a rectified voltage of 19 V. These components were readily available and required minimal handling by connection via banana cables for integration to the power supply.
+
